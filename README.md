@@ -1,6 +1,6 @@
 This is project is an AI assistant satelite, that can access any OpenAI API compliant language model both remotely and locally thanks to NordVPN's Meshnet, Ollama and Vosk.
 
-##Requirements
+## Requirements
 ### Ollama
 Consider running Ollama in a Docker container with GPU support. Ollama containers works very well through WSL.
 Install the [NVIDIA Container Toolkit](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html#installation)
@@ -64,6 +64,10 @@ There are other models available. See the official Ollama repository - [Ollama/O
 2. Log in
 3. Enable Meshnet
 [Using Meshnet on Windows](https://meshnet.nordvpn.com/getting-started/how-to-start-using-meshnet/using-meshnet-on-windows)
+4. Adjust the permissions for the satelite device.
+a. Remote Access - Enabled
+b. Local Network Access - Enabled
+[Explaining permissions](https://meshnet.nordvpn.com/features/explaining-permissions)
 
 ### Python
 1. Install Miniconda
@@ -80,4 +84,41 @@ conda activate vosk
 ### Repository
 1. Clone the repository
 ```
-git clone 
+git clone https://github.com/RoseyWasTaken/ASR-AI.git
+```
+2. Open the directory
+```
+cd ASR-AI
+```
+3. Install the repository requirements with pip
+```
+pip install -r requirements.txt
+```
+
+### Running 
+1. Define your Microphone Device ID.
+In your terminal you can run:
+```
+python
+```
+Then the following lines:
+```
+import sounddevice as sd
+sd.query_devices()
+```
+
+Output should look similar to this:
+```
+>>> import sounddevice as sd
+>>> sd.query_devices()
+   0 Microsoft Sound Mapper - Input, MME (2 in, 0 out)
+>  1 Desktop Microphone (RØDE VideoM, MME (2 in, 0 out)
+   2 Microphone (Steam Streaming Mic, MME (2 in, 0 out)
+   3 Microsoft Sound Mapper - Output, MME (0 in, 2 out)
+```
+2. Replace the device number in sd.RawInputStream class with the desired ID.
+
+3. Replace the host device address in the ModelRequest function with the Meshnet address
+
+5. Run the assistant.py script and use the wake word "hey robot" to activate the assistant.
+
