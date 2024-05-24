@@ -94,6 +94,15 @@ cd ASR-AI
 ```
 pip install -r requirements.txt
 ```
+4. Download and extract the VOSK model
+```
+wget - https://alphacephei.com/vosk/models/vosk-model-small-en-us-0.15.zip
+unzip vosk-model-small-en-us-0.15.zip
+```
+5. Install PortAudio package
+```
+sudo apt-get install portaudio19-dev
+```
 
 ### Running - Satelite
 1. Define your Microphone Device ID.
