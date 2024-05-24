@@ -1,7 +1,7 @@
 This is project is an AI assistant satelite, that can access any OpenAI API compliant language model both remotely and locally thanks to NordVPN's Meshnet, Ollama and Vosk.
 
 ## Requirements
-### Ollama
+### Ollama - Host
 Consider running Ollama in a Docker container with GPU support. Ollama containers works very well through WSL.
 Install the [NVIDIA Container Toolkit](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html#installation)
 
@@ -25,7 +25,7 @@ sudo nvidia-ctk runtime configure --runtime=docker
 sudo systemctl restart docker
 ```
 
-### Container
+### Container - Host
 1. Start the container
 
 With GPU support:
@@ -69,7 +69,7 @@ a. Remote Access - Enabled
 b. Local Network Access - Enabled
 [Explaining permissions](https://meshnet.nordvpn.com/features/explaining-permissions)
 
-### Python
+### Python - Satelite
 1. Install Miniconda
 [Latest Miniconda installer links](https://docs.anaconda.com/free/miniconda/index.html)
 2. Create a new Conda environment that has Python3.9 installed
@@ -81,7 +81,7 @@ conda create --name vosk python=3.9
 conda activate vosk
 ```
 
-### Repository
+### Repository - Satelite
 1. Clone the repository
 ```
 git clone https://github.com/RoseyWasTaken/ASR-AI.git
@@ -95,7 +95,7 @@ cd ASR-AI
 pip install -r requirements.txt
 ```
 
-### Running 
+### Running - Satelite
 1. Define your Microphone Device ID.
 In your terminal you can run:
 ```
