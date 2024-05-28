@@ -1,63 +1,53 @@
 import pygame
 import os
-import threading
-
-# Activate the pygame library
-pygame.init()
-X = 600
-Y = 600
 
 imagePath = "images"
 
-# Create the display surface object of specific dimension (X, Y)
-window = pygame.display.set_mode((X, Y))
+X = 600
+Y = 600
 
-clock = pygame.time.Clock()
+sprites = {}
 
-# Set the pygame window name
-pygame.display.set_caption('AI Assistant')
+# sprites = {"sleeping": [pygame.image1, pygame.image2],
+#           "thinking": [pygame.image3, pygame.image4], ... 
+#           }
 
-# Create a surface object, image is drawn on it
-sprites = []
+# sprites["thinking"] = "pygame.images"
 
-for i in os.listdir(imagePath):
-    currentDir = []
+def init_pygame():
+    pygame.init()
 
-    for j in os.listdir(os.path.join(imagePath, i)):
-        image = pygame.image.load(os.path.join(imagePath, i, j))
-        image = pygame.transform.scale(image, (X, Y))
-        currentDir.append(image)
+    window = pygame.display.set_mode((X, Y))
 
-    sprites.append(currentDir)
+    pygame.display.set_caption('AI Assistant')
 
-change_event = threading.Event()
-shared_data = {"face": 0,
-               "text": ""}
+    return window
 
-def displayFace():
-    face = shared_data["face"]
-    # sleeping face = 0
-    # speaking face = 1
-    # thinking face = 2
+def load_sprites():
 
-    value = 0
+    for i in os.listdir(imagePath):
+        currentDir = []
 
-    # This loop will run until it is explicitly stopped from the main program
-    while True:
-        if change_event.is_set():
-            face = shared_data["face"]
-            change_event.clear()
-                    
-        clock.tick(2)
+        for j in os.listdir(os.path.join(imagePath, i)):
+            image = pygame.image.load(os.path.join(imagePath, i, j))
+            image = pygame.transform.scale(image, (X, Y))
+            currentDir.append(image)
 
-        if value >= len(sprites[face]):
-            value = 0
+        sprites[i] = currentDir
+    
+    return sprites
 
-        displayImage = sprites[face][value]
+window = init_pygame()
+sprites = load_sprites()
+
+def display_face(face, text=""):
+
+
+        displayImage = sprites[face][0]
 
         window.blit(displayImage, (0, 0))
-        if shared_data["face"] == 1:
-            text = shared_data["text"]
+
+        if face == "speaking":
             font_size = 36
             font_color = (0, 0, 0)
             line_spacing = 1.2  # Adjust this value to set the spacing between lines
@@ -88,10 +78,8 @@ def displayFace():
                 text_x = (X - text_surface.get_width()) // 2
                 window.blit(text_surface, (text_x, text_y))
                 text_y += int(font_size * line_spacing)
-
+        
         pygame.display.update()
-
-        value += 1
 
         # Check for any pygame events (necessary to allow window to close)
         for event in pygame.event.get():
