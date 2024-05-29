@@ -125,9 +125,14 @@ Output should look similar to this:
    2 Microphone (Steam Streaming Mic, MME (2 in, 0 out)
    3 Microsoft Sound Mapper - Output, MME (0 in, 2 out)
 ```
-2. Replace the device number in sd.RawInputStream class with the desired ID.
+2. Replace the device number in the mic variable with the desired ID.
+
+```
+mic = 1
+
+```
 
 3. Replace the host device address in the ModelRequest function with the Meshnet address
 
-5. Run the assistant.py script and use the wake word "hey robot" to activate the assistant.
+4. Run the assistant.py script and use the wake word "hey robot" to activate the assistant.
 
