@@ -5,7 +5,7 @@ from gui import display_face
 
 q = queue.Queue()
 
-mic = 1
+mic = 3
 
 device_info = sd.query_devices(mic, "input")
 samplerate = int(device_info["default_samplerate"])
@@ -60,7 +60,7 @@ try:
                 print(response)
             else:
                print("Sleeping")
-
+               display_face("sleeping")
 except KeyboardInterrupt:
     print("\nDone")
     exit(0)

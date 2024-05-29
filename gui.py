@@ -3,8 +3,8 @@ import os
 
 imagePath = "images"
 
-X = 600
-Y = 600
+X = 480
+Y = 320
 
 sprites = {}
 
@@ -48,6 +48,7 @@ def display_face(face, text=""):
         window.blit(displayImage, (0, 0))
 
         if face == "speaking":
+            window.fill((255,255,255))
             font_size = 36
             font_color = (0, 0, 0)
             line_spacing = 1.2  # Adjust this value to set the spacing between lines
@@ -72,7 +73,7 @@ def display_face(face, text=""):
             total_height = len(lines) * int(font_size * line_spacing)
 
             # Position the text on the window
-            text_y = ((Y - total_height) // 2 ) + 200
+            text_y = ((Y - total_height) // 2 )
             for line in lines:
                 text_surface = font.render(line, True, font_color)
                 text_x = (X - text_surface.get_width()) // 2
